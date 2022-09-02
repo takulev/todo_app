@@ -67,7 +67,7 @@ const Home: NextPage = () => {
       </ul>
       <Form todos={todos} setTodos={setTodos} />
     </div>
-  )
+  );
 };
 
 export default Home
