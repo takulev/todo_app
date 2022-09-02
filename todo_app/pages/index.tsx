@@ -34,12 +34,7 @@ const Card: FC<CardType> = ({ todo, todos, setTodos }) => {
   return (
     <div onClick={(event) => setCanInput(event.target !== event.currentTarget)}>
       {!canInput && <p>{todo.description}</p>}
-      {canInput && (
-        <input
-          value={description}
-          onInput={(event) => onUpdate(todo.id, event.target.value)}
-        />
-      )}
+      {canInput && <input value={description} onInput={(event) => onUpdate(todo.id, event.target.value)} />}
       <button onClick={() => setTodos(todos.filter(_todo => _todo.id !== todo.id))}>Delete</button>
     </div>
   );
@@ -54,7 +49,7 @@ const Form: FC<FormType> = ({ todos, setTodos }) => {
 
   return (
     <>
-      <input onInput={(event) => setDescription(event.target.value)} value={description}></input>
+      <input value={description} onInput={(event) => setDescription(event.target.value)}></input>
       <button onClick={() => onSubmit()}>SAVE</button>
     </>
   );
