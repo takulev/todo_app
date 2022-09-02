@@ -1,36 +1,20 @@
 import type { NextPage } from 'next';
-import { FC, useState } from 'react';
-
-type TodoType = {
-  id: number
-  description: string
-};
+import { Dispatch, FC, useState } from 'react';
 
 type CardType = {
   todo: TodoType
   todos: TodoType[]
-  setTodos: (todos: TodoType[]) => {}
+  setTodos: Dispatch<TodoType[]>
 };
-
 
 type FormType = {
   todos: TodoType[]
-  setTodos: (todos: TodoType[]) => {}
+  setTodos: Dispatch<TodoType[]>
 };
 
-const Form: FC<FormType> = ({ todos, setTodos }) => {
-  const [description, setDescription] = useState('');
-  const onSubmit = () => {
-    setTodos([...todos, { id: todos.length + 1, description }]);
-    setDescription('');
-  };
-
-  return (
-    <>
-      <input onInput={(event) => setDescription(event.target.value)} value={description}></input>
-      <button onClick={() => onSubmit()}>SAVE</button>
-    </>
-  );
+type TodoType = {
+  id: number
+  description: string
 };
 
 const Card: FC<CardType> = ({ todo, todos, setTodos }) => {
@@ -61,8 +45,23 @@ const Card: FC<CardType> = ({ todo, todos, setTodos }) => {
   );
 };
 
+const Form: FC<FormType> = ({ todos, setTodos }) => {
+  const [description, setDescription] = useState('');
+  const onSubmit = () => {
+    setTodos([...todos, { id: todos.length + 1, description }]);
+    setDescription('');
+  };
+
+  return (
+    <>
+      <input onInput={(event) => setDescription(event.target.value)} value={description}></input>
+      <button onClick={() => onSubmit()}>SAVE</button>
+    </>
+  );
+};
+
 const Home: NextPage = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<TodoType[]>([]);
 
   return (
     <div>
